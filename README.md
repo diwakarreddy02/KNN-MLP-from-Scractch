@@ -1,1 +1,33 @@
 # vkashir-a4
+
+## REPORT AND WORKFLOW- A4
+
+### PART1:
+#### Workflow:
+The main motto for this problem is to design k-Nearest Neighbors (KNN) algorithm. KNN, being a non-parametric supervised machine learning approach, is utilized for both classification and regression problems. It is used to produce predictions for classification by locating the k training samples that are closest to a new sample in the test dataset. '
+
+There are many parameters, that are considered in KNN. But, in the algorithm, we have implemented most important ones, that include, 'n_neighbors', this defines how many closest neighbors, we need to consider, to predict the test sample class value. 'weights', it has two possible values: 1. 'Uniform': Each neighborhood's points are given equal weight. 2. 'Distance': The inverse of a point's distance is used to weight it. In this situation, a test sample's immediate neighbors will have more of an impact than its far neighbors. 'metric', it is used to calculate distance. It has two possible values: 1. l1: Manhattan distance 2. l2: Eucledian distance.
+
+Initally, we are given with 4 functions to work. I have updated the 'euclidean_distance' funciton in utils.py by calculating the euclidan distance between two numpy arrays. Then, I have updated the 'manhattan_distance' funciton in utils.py by calculating the manhattan distance between two numpy arrays. These functions return the euclidean and manhattan distances respectively. Then, I have updated the 'fit' function in k_nearest-neighbors by assigining training data sample to _X and training output values to _y. Finally, the funciton 'predict', is used to get the prediction class values for the given test data.
+
+Coming to the flow of work, first, I had to take the given data and initialize it to the fit the model. In the 'predict', there are two possible ways to get the class values of test samples. So, if the weights is uniform, then all the closest neighbors get the same prority. To get the predicted class value of each sample in test data, we iterate it using a 'for' loop. Then, we use funtion to get prediction values, in the funciton, we initally get the neighbors of the given test sample using get_neighbours funciton. In the 'get_neighbours', function, we calculate the distances of the test sample with each of the trained sample. Calculating the distance between the samples is one of the most important factors in KNN. To keep the train class values relevant to the train sample, I have appended the train class to train sample after calculating the distance and then, created a new list of tuples which included, sample data including class value and distance. Then, I sorted the list using distance as the paramter. Then, I got the n_neighbors by getting only the 1st part of the tuple. Once, we have the neighbors, we have the class values of the closest neighbors as the last element in each list of the neighbors list. We assign the class values that are maximum in number to the class value of the test row sample. Similarly, we get the prediction values when weights is uniform, but to give priority to the closest neighbors, instead of taking distances directly, we take it as 1/distance and do the same process as the prior one. We do these steps for all the rows in the test data and get the class values for all the rows. Then, append them in the predict function and return the list of the predicted class values for the test data.
+
+#### Chalanages Faced:
+Initally, I didn't consider the train class values, but later on realised the mistake. It took some time to figure out various attributes of the data that has been proivided.
+
+#### Notable Obervations:
+K-Nearest Neighbors is a lazy algorithm, it does not really learn much from the training data. So, you don't really need to train the algorithm. It operates well with few features. More data is required as the number of features rises. There is an overfitting issue when there is more data since it is impossible to predict which bit of noise will affect the model. Due to the larger size of the digits dataset, prediction time was longer than for the iris dataset.
+
+### PART2:
+#### Workflow:
+The main motto for this problem is to design Multi-layer Perceptron (MLP) algorithm. It is a feed forward neural network algorithm,. It has three different kinds of layers: the input layer, the output layer, and the hidden layer. It being a feed forward algorithm, the data flow is from input layer to output layer. The input layer receives and processes input signal. The output layer is responsible for tasks such as prediction and categorization. The true computational engine of the MLP is an arbitrary number of hidden layers positioned between the input and output layers. With the help of the back propagation learning algorithm, the MLP's neurons are trained. Since they can approximate any continuous function, MLPs can deal with issues that are not solvable in a linear way.
+
+If the value of the input parameter "derivative" is "True," each activation function also returns a derivative depending on that parameter. Following the implementation of these activation functions and their derivatives, the one hot encoding function was used to convert the class label array into a onehotencoded array for the neural network's output layer.
+
+Next, we need to initialize the input data and different parameter in the class. Randam values for weights and bias are assigned to hidden, bias and output layers. The values of these layers should be in the range of (-1, 1). The fit approach employed a feed forward step, and the intermediate variables were kept for use in the backpropagation step. To determine the gradients of the cross entropy loss w.r.t. weights at each layer, error at the output layer was first estimated and then back propagated. Based on these computed gradients, weights were then modified. Repeat these steps until maximum number of iterations are reached. The output layer with feedforward step was calculated using the predict technique, and the labels were predicted using the np.argmax to find the class corresponding to the output layer's most active neuron.
+
+#### Chalanages Faced:
+Due to the different random variables that we generate, I intially faced issues with the dimension of the parameters. I faced chalanges with the implementation of back propagation. I had to take references for activations of sigmoid from different yt videos and websites. Compiling matrix multiplication was difficult with all the different dimensions.
+
+#### Notable Obervations:
+The algorithm takes longer time for implementation for training and prediction
